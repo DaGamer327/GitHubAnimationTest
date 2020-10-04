@@ -10,6 +10,13 @@ public class NewBehaviourScript : MonoBehaviour
 
     public AudioSource musicSource;
 
+    Animator anim;
+
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -17,12 +24,13 @@ public class NewBehaviourScript : MonoBehaviour
         {
             musicSource.clip = musicClipOne;
             musicSource.Play();
+            anim.SetInteger("state", 1);
 
         }
-
         if (Input.GetKeyUp(KeyCode.W))
         {
             musicSource.Stop();
+            anim.SetInteger("state", 0);
 
         }
 
@@ -30,12 +38,13 @@ public class NewBehaviourScript : MonoBehaviour
         {
             musicSource.clip = musicClipTwo;
             musicSource.Play();
+            anim.SetInteger("state", 2);
         }
 
         if (Input.GetKeyUp(KeyCode.R))
         {
             musicSource.Stop();
-
+            anim.SetInteger("state", 0);
         }
 
         if (Input.GetKeyDown(KeyCode.L))
@@ -46,6 +55,11 @@ public class NewBehaviourScript : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.L))
         {
             musicSource.loop = false;
+        }
+
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
         }
     }
 }
